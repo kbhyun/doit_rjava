@@ -55,3 +55,94 @@ exam %>%
   mutate(total = math + english + science,
          mean = (math + english + science)/3) %>%
   head
+
+
+exam %>% 
+  mutate(total = math + english + science) %>% 
+  arrange(total) %>% 
+    head
+
+
+###################
+06-6 집단별로 요약
+mpg %>% 
+  group_by(manufacturer, drv) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  head
+
+exam %>%
+  group_by(class) %>% 
+  summarise(mean_math = mean(math),
+            sum_math = sum(math),
+            median_math = median(math),
+            n = n())
+
+mpg %>% 
+  group_by(manufacturer) %>% 
+  filter(class == "suv") %>% 
+  mutate(tot = (cty+hwy)/2) %>% 
+  summarise(mean_tot = mean(tot)) %>% 
+  arrange(desc(mean_tot)) %>% 
+  head(5)
+  head
+  
+  
+  mpg %>% 
+    group_by(manufacturer) %>% 
+    mutate(tot = (cty+hwy)/2) %>% 
+    summarise(mean_tot = mean(tot)) %>% 
+    arrange(desc(mean_tot)) %>% 
+    head(5)
+
+  
+  mpg<-as.data.frame(ggplot2:: mpg)
+  mpg %>%
+    group_by (class) %>% 
+    summarise(mean_cty = mean(cty))
+    
+   
+  mpg <- as.data.frame( 의미는?)
+  mpg %>%
+    group_by(class) %>% 
+    summarise(mean_cty = mean(cty)) 
+  
+  
+  mpg<-as.data.frame(ggplot2:: mpg)
+  
+  mpg %>%
+    group_by (class) %>% 
+    summarise(mean_cty = mean(cty))
+  
+  
+  ###############
+  06-7 데이터 합치기
+  
+left_join  bind_rows()
+  
+test1 <- data.frame(id = c(1,2,3,4,5),
+                    midterm = c(60, 80, 70, 90, 85)) 
+test2 <- data.frame(id = c(1,2,3,4,5),
+                    final = c(70, 83, 65, 95, 80))  
+
+test1
+test2
+
+total <-left_join(test1, test2, by = "id") 
+total
+
+
+name <- data.frame(class = c(1,2,3,4,5),
+                   teacher = c("kim", "lee" ,"park", "choi", "jung")
+name
+
+
+mpg <-as.data.frame(ggplot2:: mpg)
+
+fuel <- data.frame(fl=c("c","d", "e", "p", "r"),
+                   price_fl = c(2.35, 2.38, 2.11, 2.76, 2.22),
+                   stringsAsFactors = F)
+
+head(mpg)
+
+mpg <- left_join(mpg, fuel, by = "fl")
+head(mpg)
